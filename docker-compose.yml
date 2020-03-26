@@ -1,0 +1,25 @@
+version: "2.1"
+
+services:
+  website1:
+    image: nginx:alpine
+    ports:
+      - "8881:80"
+    volumes:
+      - ./websites/website1-index.html:/usr/share/nginx/html/index.html
+
+  website2:
+    image: nginx:alpine
+    ports:
+      - "8882:80"
+    volumes:
+      - ./websites/website2-index.html:/usr/share/nginx/html/index.html
+
+
+  reverse_proxy:
+    image: nginx:alpine
+    ports:
+      - "8888:80"
+    volumes:
+      - ./reverse-proxy-nginx.conf:/etc/nginx/conf.d/reverse-proxy-nginx.conf
+      - ./websites/reverse-proxy-index.html:/usr/share/nginx/html/index.html
